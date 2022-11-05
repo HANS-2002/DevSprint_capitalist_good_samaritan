@@ -1,4 +1,9 @@
 <%- include('../partials/header'); %>
+<% if(dpImgUrl){ %>
+    <%- include('../partials/navbarSigned', {dpImgUrl: dpImgUrl}); %>
+<% } else{ %>  
+    <%- include('../partials/navbar'); %>
+<% } %>
 
 <h1 class="text-3xl font-bold underline">Hello world!</h1>
 

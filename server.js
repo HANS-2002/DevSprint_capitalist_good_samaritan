@@ -11,6 +11,7 @@ const app = express();
 const auth = require('./routes/auth/authRoutes');
 const protected = require('./routes/protected/protectedRoutes');
 const unprotected = require('./routes/unprotected/unprotectedRoutes');
+const { SanityClient } = require('./routes/config');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -38,7 +39,19 @@ app.use('/api', unprotected);
 const port = process.env.PORT || 9000;
 
 app.get('/', (req, res) => {
-    res.render('./pages/index');
+    const query = `*[_type == "user" && email == "${req.session.email}"]`;
+    SanityClient.fetch(query).then(async (user) => {
+        if (user.length > 0) {
+            let imgString = user[0].displayPicture.asset._ref.substring(6);
+            imgString = imgString.slice(0, -4) + '.' + imgString.slice(-3);
+            let imgUrl = 'https://cdn.sanity.io/images/aac64ffk/production/' + imgString;
+            return res.render('./pages/index', { dpImgUrl: imgUrl });
+        }
+        else {
+            res.render('./pages/index', { dpImgUrl: null });
+        }
+    });
+
 });
 
 app.get('/login', (req, res) => {
@@ -51,11 +64,24 @@ app.get('/signup', (req, res) => {
 
 app.get('/user', (req, res) => {
     if (req.session.email) {
-        res.render('./pages/user');
+        const query = `*[_type == "user" && email == "${req.session.email}"]`;
+        SanityClient.fetch(query).then(async (user) => {
+            let monthDict = { 0: 'January', 1: 'February', 2: 'March', 3: 'April', 4: 'May', 5: 'June', 6: 'July', 7: 'August', 8: 'September', 9: 'October', 10: 'November', 11: 'December' };
+            let date = new Date(user[0]._createdAt);
+            let dateStr = monthDict[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear();
+            let imgString = user[0].displayPicture.asset._ref.substring(6);
+            imgString = imgString.slice(0, -4) + '.' + imgString.slice(-3);
+            let imgUrl = 'https://cdn.sanity.io/images/aac64ffk/production/' + imgString;
+            return res.render('./pages/user', { user: user[0].name, memberSince: dateStr, dpImgUrl: imgUrl });
+        });
     }
     else {
         res.redirect('/login');
     }
+});
+
+app.get('/posts', (req, res) => {
+
 });
 
 app.listen(port, () => {

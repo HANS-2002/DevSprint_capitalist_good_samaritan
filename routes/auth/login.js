@@ -15,7 +15,7 @@ const login = async (req, res) => {
                 req.session.email = user[0].email;
                 req.session.save(function (err) {
                     if (err) return next(err);
-                    return res.redirect('/user');
+                    return res.redirect('/');
                     // return res.status(200).send({ message: "Login successful" });
                 });
             }

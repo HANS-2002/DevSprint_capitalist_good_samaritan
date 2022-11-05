@@ -1,3 +1,7 @@
+<!-- component -->
+<!-- AlpineJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.8.1/cdn.min.js" defer></script>
+
 <nav
   class="flex items-center justify-between flex-wrap bg-white py-4 lg:px-12 shadow border-solid border-t-2 border-blue-700"
 >
@@ -70,18 +74,50 @@
         </svg>
       </button>
     </form>
-    <div class="flex">
-      <a
-        href="/signup"
-        class="block text-md px-4 py-2 rounded text-blue-700 ml-2 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
-        >Sign Up</a
-      >
 
-      <a
-        href="/login"
-        class="block text-md px-4 ml-2 py-2 rounded text-blue-700 font-bold hover:text-white mt-4 hover:bg-blue-700 lg:mt-0"
-        >Login</a
-      >
+    <div class="flex justify-center p-1" onmouseover="unHide()" onmouseleave="hide()">
+        <!-- Dropdown -->
+        <div class="relative p-1" onmouseover="unHide()" onmouseleave="hide()">
+            <button class="block h-10 w-10 rounded-full overflow-hidden focus:outline-none">
+                <img alt="avatar" class="h-full w-full object-cover" src=<%= dpImgUrl %> >
+            </button>
+          <!-- Dropdown Body -->
+          <form method="GET" action="/auth/logout" id="dpDropdown"  class="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl hidden">   
+            <a href="/user" class="text-center transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white">
+                Your Profile
+            </a>
+            <div class="py-2">
+              <hr></hr>
+            </div>
+            <button type="submit" style="width: 100%;" class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white">    
+                Logout
+            </button>
+          </form>
+        </div>
     </div>
   </div>
 </nav>
+
+<script>
+    const appData = () => {
+        return {
+            percent: 0,
+
+            appInit() {
+                // source: https://codepen.io/A_kamel/pen/qBmmGKJ
+                window.addEventListener('scroll', () => {
+                    let winScroll = document.body.scrollTop || document.documentElement.scrollTop,
+                        height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+                    this.percent = Math.round((winScroll / height) * 100);
+                });
+            },
+        };
+    };
+    function unHide() {
+        document.getElementById('dpDropdown').classList.remove('hidden');
+    };
+    function hide() {
+        document.getElementById('dpDropdown').classList.add('hidden');
+    };
+</script>
