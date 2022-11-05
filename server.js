@@ -21,7 +21,7 @@ app.use(cors());
 const dbString = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.0oischi.mongodb.net/sessionsDB`;
 app.use(session({
     secret: process.env.SESSION_PASS,
-    store: MongoStore.create({ 
+    store: MongoStore.create({
         mongoUrl: dbString,
         ttl: 60 * 60 * 24 * 7, // 1 week
         autoRemove: 'native'
@@ -47,6 +47,15 @@ app.get('/login', (req, res) => {
 
 app.get('/signup', (req, res) => {
     res.render('./pages/signup');
+});
+
+app.get('/user', (req, res) => {
+    if (req.session.email) {
+        res.render('./pages/user');
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
 app.listen(port, () => {
