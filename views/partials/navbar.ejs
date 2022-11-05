@@ -1,0 +1,117 @@
+<!-- component -->
+<!-- AlpineJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.8.1/cdn.min.js" defer></script>
+
+<!-- Slider Component Container -->
+<div class="flex flex-col items-center justify-center mt-32" x-cloak x-data="appData()" x-init="appInit()">
+    <div class="flex flex-col">
+        <!-- Page Scroll Progress -->
+        <div class="fixed inset-x-0 top-0 z-50 h-0.5 mt-0.5
+            bg-blue-500" :style="`width: ${percent}%`"></div>
+
+        <!-- Navbar -->
+        <nav class="flex justify-between py-4 bg-white/80
+            backdrop-blur-md shadow-md w-full
+            fixed top-0 left-0 right-0 z-10">
+
+            <!-- Logo Container -->
+            <div class="flex items-center pl-6">
+                <!-- Logo -->
+                <a class="cursor-pointer">
+                    <h3 class="text-2xl font-medium text-blue-500">
+                        <img class="h-10 object-cover"
+                        src="./images/socio.png" alt="SOCIO" >
+                    </h3>
+                </a>
+            </div>
+
+            
+            <!-- Icon Menu Section -->
+            <div class="flex items-center space-x-5 pr-6">
+                <!-- Register -->
+                <a class="flex text-gray-600 hover:text-blue-500
+                    cursor-pointer transition-colors duration-300">
+
+                    <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M12 0L11.34 .03L15.15 3.84L16.5 2.5C19.75 4.07 22.09 7.24 22.45 11H23.95C23.44 4.84 18.29 0 12 0M12 4C10.07 4 8.5 5.57 8.5 7.5C8.5 9.43 10.07 11 12 11C13.93 11 15.5 9.43 15.5 7.5C15.5 5.57 13.93 4 12 4M12 6C12.83 6 13.5 6.67 13.5 7.5C13.5 8.33 12.83 9 12 9C11.17 9 10.5 8.33 10.5 7.5C10.5 6.67 11.17 6 12 6M.05 13C.56 19.16 5.71 24 12 24L12.66 23.97L8.85 20.16L7.5 21.5C4.25 19.94 1.91 16.76 1.55 13H.05M12 13C8.13 13 5 14.57 5 16.5V18H19V16.5C19 14.57 15.87 13 12 13M12 15C14.11 15 15.61 15.53 16.39 16H7.61C8.39 15.53 9.89 15 12 15Z" />
+                    </svg>
+
+                    Register
+                </a>
+
+                <!-- Login -->
+                <a class="flex text-gray-600 
+                    cursor-pointer transition-colors duration-300
+                    font-semibold text-blue-600">
+
+                    <svg class="fill-current h-5 w-5 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M10,17V14H3V10H10V7L15,12L10,17M10,2H19A2,2 0 0,1 21,4V20A2,2 0 0,1 19,22H10A2,2 0 0,1 8,20V18H10V20H19V4H10V6H8V4A2,2 0 0,1 10,2Z" />
+                    </svg>
+
+                    Login
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- drop down added  -->
+    <!-- component -->
+<div class="flex justify-center">
+    <div class="relative inline-block mb-20">
+        <!-- Dropdown toggle button -->
+        <button class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white dark:bg-gray-800 focus:outline-none">
+            <span class="mx-1">Jane Doe</span>
+            <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
+            </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-800">
+            <a href="#" class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
+                <div class="mx-1">
+                    <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">Jane Doe</h1>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">janedoe@exampl.com</p>
+                </div>
+            </a>
+
+            <hr class="border-gray-200 dark:border-gray-700 ">
+            
+            <a href="#" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                view profile
+            </a>
+            
+            
+            <a href="#" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                Sign Out
+            </a>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- Slider Container -->
+<script>
+    const appData = () => {
+        return {
+            percent: 0,
+
+            appInit() {
+                // source: https://codepen.io/A_kamel/pen/qBmmGKJ
+                window.addEventListener('scroll', () => {
+                    let winScroll = document.body.scrollTop || document.documentElement.scrollTop,
+                        height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+                    this.percent = Math.round((winScroll / height) * 100);
+                });
+            },
+        };
+    };
+</script>
