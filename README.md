@@ -1,6 +1,6 @@
 # DevSprint_capitalist_good_samaritan
 
-Visit the website <a href="https://devsprinthackathon.herokuapp.com/">here</a>
+Visit the website <a href="https://devsprint-hackathon.up.railway.app/">here</a>
 
 ## Team members
 Member name  | Github Id
