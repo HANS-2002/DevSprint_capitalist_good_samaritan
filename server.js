@@ -9,8 +9,6 @@ const MongoStore = require('connect-mongo');
 const app = express();
 //Routes
 const auth = require('./routes/auth/authRoutes');
-const protected = require('./routes/protected/protectedRoutes');
-const unprotected = require('./routes/unprotected/unprotectedRoutes');
 const { SanityClient } = require('./routes/config');
 
 app.set('view engine', 'ejs');
@@ -33,8 +31,6 @@ app.use(session({
 }));
 
 app.use('/auth', auth);
-app.use('/api', protected);
-app.use('/api', unprotected);
 
 const port = process.env.PORT || 9000;
 
@@ -55,6 +51,7 @@ app.get('/', (req, res) => {
                 postDate: dateStr,
                 postTitle: post.title,
                 postDescription: post.body,
+                postAuthor: post.author
             });
         });
         const userQuery = `*[_type == "user" && email == "${req.session.email}"]`;
@@ -90,7 +87,27 @@ app.get('/user', (req, res) => {
             let imgString = user[0].displayPicture.asset._ref.substring(6);
             imgString = imgString.slice(0, -4) + '.' + imgString.slice(-3);
             let imgUrl = 'https://cdn.sanity.io/images/aac64ffk/production/' + imgString;
-            return res.render('./pages/user', { user: user[0].name, memberSince: dateStr, dpImgUrl: imgUrl });
+            let posts = user[0].posts;
+            const Posts = [];
+            let id = user[0].posts[0]._ref;
+            // SanityClient.fetch(`*[${id} in $posts]{_id, mainImage, _createdAt, title, body, author}`, { posts: posts }).then(async (Post) => {console.log(Post)});
+            // posts.forEach(post => {
+            //     let imgString = post.mainImage.asset._ref.substring(6);
+            //     imgString = imgString.slice(0, -4) + '.' + imgString.slice(-3);
+            //     let imgUrl = 'https://cdn.sanity.io/images/aac64ffk/production/' + imgString;
+            //     let monthDict = { 0: 'January', 1: 'February', 2: 'March', 3: 'April', 4: 'May', 5: 'June', 6: 'July', 7: 'August', 8: 'September', 9: 'October', 10: 'November', 11: 'December' };
+            //     let date = new Date(post._createdAt);
+            //     let dateStr = monthDict[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear();
+            //     Posts.push({
+            //         _id: post._id,
+            //         imgUrl: imgUrl,
+            //         postDate: dateStr,
+            //         postTitle: post.title,
+            //         postDescription: post.body,
+            //         postAuthor: post.author
+            //     });
+            // });
+            return res.render('./pages/user', { user: user[0].name, memberSince: dateStr, dpImgUrl: imgUrl, posts: Posts });
         });
     }
     else {
@@ -104,6 +121,15 @@ app.post('/search', (req, res) => {
         console.log(posts);
     });
     return res.redirect('/');
+});
+
+app.post('/post', (req, res) => {
+    if (req.session.email) {
+        console.log(req.body);
+    }
+    else {
+        return res.redirect('/login');
+    }
 });
 
 app.listen(port, () => {

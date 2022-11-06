@@ -8,21 +8,46 @@
     <link rel="shortcut icon" href="./images/socio.png" type="image/x-icon">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <style>
-      :root {
-          --main-color: #4a76a8;
-      }
-  
-      .bg-main-color {
-          background-color: var(--main-color);
-      }
-  
-      .text-main-color {
-          color: var(--main-color);
-      }
-  
-      .border-main-color {
-          border-color: var(--main-color);
-      }
+        :root {
+            --main-color: #4a76a8;
+        }
+
+        *{
+            scroll-behavior: smooth;
+        }
+
+        .bg-main-color {
+            background-color: var(--main-color);
+        }
+
+        .text-main-color {
+            color: var(--main-color);
+        }
+
+        .border-main-color {
+            border-color: var(--main-color);
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #c5c5c5;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: rgb(255, 123, 123);
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(255, 160, 160);
+        }
+
   </style>
   </head>
   <body>

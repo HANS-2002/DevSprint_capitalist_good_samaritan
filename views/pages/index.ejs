@@ -5,11 +5,11 @@
     <%- include('../partials/navbar'); %>
 <% } %>
 
-<section class="pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+<section class="pt-8 lg:pt-8 pb-8 lg:pb-8">
     <div class="container">
        <div class="flex flex-wrap -mx-4">
         <% for(var i=0; i<posts.length; i++) { %>
-            <%- include('../partials/post', {id: posts[i]._id, imgUrl: posts[i].imgUrl, postDate: posts[i].postDate, postTitle: posts[i].postTitle, postDescription: posts[i].postDescription}); %>
+            <%- include('../partials/post', {id: posts[i]._id, imgUrl: posts[i].imgUrl, postDate: posts[i].postDate, postTitle: posts[i].postTitle, postDescription: posts[i].postDescription, postAuthor: posts[i].postAuthor}); %>
          <% } %>
         </div>
    </div>
