@@ -2,10 +2,9 @@
   "name": "socio",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
